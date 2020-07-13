@@ -5,7 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
-namespace MaritTests
+namespace KunglaProovitoo
 {
 	class Tests
 	{
@@ -100,7 +100,6 @@ namespace MaritTests
 
 			// Validate that error appears and user is not loged in.
 			string error = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id='login']/div/h1/following-sibling::*[1]"))).Text;
-			Console.WriteLine(error);
 			Assert.That(error.Contains(message), "Error ei ole nähtav.");
 		}
 
