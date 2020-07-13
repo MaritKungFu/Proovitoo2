@@ -74,8 +74,7 @@ namespace MaritTests
 		}
 
 		[Test, Order (2)]
-		// TODO: Tee message paremaks!
-		[TestCase("", "", "Sisesta oma ")]
+		[TestCase("", "", "Sisesta oma kasutajanimi\r\nSisesta oma parool")]
 		[TestCase("Testitestimine", "", "Sisesta oma parool")]
 		[TestCase("", "ckHD4d4a4TibTvN", "Sisesta oma kasutajanimi")]
 		[TestCase("Marit", "ckHD4d4a4TibTvN", "Sisestasid vale kasutajanime või parooli")]
