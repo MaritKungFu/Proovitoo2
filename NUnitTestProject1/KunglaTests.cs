@@ -22,7 +22,7 @@ namespace MaritTests
 		[OneTimeSetUp]
 		public void Start_Browser()
 		{
-			driver = new ChromeDriver
+			driver = new ChromeDriver(".")
 			{
 				// Base url.
 				Url = "https://www.okidoki.ee/"
@@ -101,7 +101,8 @@ namespace MaritTests
 
 			// Validate that error appears and user is not loged in.
 			string error = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id='login']/div/h1/following-sibling::*[1]"))).Text;
-			Assert.IsTrue(error.Contains(message), "Error ei ole nähtav.");
+			Console.WriteLine(error);
+			Assert.That(error.Contains(message), "Error ei ole nähtav.");
 		}
 
 		[OneTimeTearDown]
