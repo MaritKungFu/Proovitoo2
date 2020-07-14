@@ -50,7 +50,7 @@ namespace KunglaProovitoo
 			ValidateLogo();
 			// Find and click on "Logi sisse" button.
 			Console.WriteLine("Click log in button on homepage.");
-			driver.FindElement(By.XPath("//a[@href='/login/']")).Click();
+			wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//a[@href='/login/']"))).Click();
 
 			ValidateLogo();
 			LogInAction(username, password);
