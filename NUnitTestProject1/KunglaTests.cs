@@ -19,6 +19,19 @@ namespace KunglaProovitoo
 			Assert.AreEqual("okidoki", logo, "Logo text is not okidoki.");
 		}
 
+		public void LogInAction(string username, string password)
+		{
+			// Find h1 and validate value.
+			string header = wait.Until(ExpectedConditions.ElementIsVisible(By.TagName("h1"))).Text;
+			Assert.AreEqual("Sisene okidoki keskkonda", header, "H1 is not correct.");
+			// Find "Kasutajanimi" field and insert username.
+			driver.FindElement(By.Id("login-input")).SendKeys(username);
+			// Find "Parool" field and insert password.
+			driver.FindElement(By.Id("password-input")).SendKeys(password);
+			// Find "logi sisse" button and click
+			driver.FindElement(By.XPath("//*[@value='Logi sisse']")).Click();
+		}
+
 		[OneTimeSetUp]
 		public void Start_Browser()
 		{
@@ -44,22 +57,9 @@ namespace KunglaProovitoo
 			driver.FindElement(By.XPath("//a[@href='/login/']")).Click();
 
 			ValidateLogo();
-
-			// Find h1 and validate value.
-			string header = wait.Until(ExpectedConditions.ElementIsVisible(By.TagName("h1"))).Text;
-			Assert.AreEqual("Sisene okidoki keskkonda", header, "H1 is not correct.");
-
-			// Find "Kasutajanimi" field and insert username.
-			driver.FindElement(By.Id("login-input")).SendKeys(username);
-
-			// Find "Parool" field and insert password.
-			driver.FindElement(By.Id("password-input")).SendKeys(password);
-
-			// Find "logi sisse" button and click
-			driver.FindElement(By.XPath("//*[@value='Logi sisse']")).Click();
+			LogInAction(username, password);
 
 			Assert.IsEmpty((driver.FindElements(By.XPath("//*[@id='login']/div/h1/following-sibling::*[1]"))), "Error visible");
-
 			ValidateLogo();
 
 			// Validate that user is loged in and log off button becomes visible.
@@ -89,20 +89,8 @@ namespace KunglaProovitoo
 			driver.Url = "https://www.okidoki.ee/login/";
 
 			ValidateLogo();
-
-			// Find h1 and validate value.
-			string header= wait.Until(ExpectedConditions.ElementIsVisible(By.TagName("h1"))).Text;
-			Assert.AreEqual("Sisene okidoki keskkonda", header, "H1 is not correct.");
-
-			// Find "Kasutajanimi" field and insert username.
-			driver.FindElement(By.Id("login-input")).SendKeys(username);
-
-			// Find "Parool" field and insert password.
-			driver.FindElement(By.Id("password-input")).SendKeys(password);
-
-			// Find "logi sisse" button and click
-			driver.FindElement(By.XPath("//*[@value='Logi sisse']")).Click();
-
+			LogInAction(username, password);
+			Assert.IsNotEmpty((driver.FindElements(By.XPath("//*[@id='login']/div/h1/following-sibling::*[1]"))), "Error is not visible");
 			// Validate that error appears and user is not loged in.
 			string error = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id='login']/div/h1/following-sibling::*[1]"))).Text;
 			Assert.AreEqual(message, error, "Error is not correct.");
