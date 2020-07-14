@@ -21,7 +21,6 @@ namespace KunglaProovitoo
 
 		public void LogInAction(string username, string password)
 		{
-			// Find h1 and validate value.
 			string header = wait.Until(ExpectedConditions.ElementIsVisible(By.TagName("h1"))).Text;
 			Assert.AreEqual("Sisene okidoki keskkonda", header, "H1 is not correct.");
 			// Find "Kasutajanimi" field and insert username.
@@ -37,12 +36,10 @@ namespace KunglaProovitoo
 		{
 			driver = new ChromeDriver(".")
 			{
-				// Base url.
 				Url = "https://www.okidoki.ee/"
 			};
 
 			wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-			wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
 		}
 
 		[Test, Order(1)]
@@ -51,14 +48,12 @@ namespace KunglaProovitoo
 		public void LogIn(string username, string password)
 		{
 			ValidateLogo();
-
 			// Find and click on "Logi sisse" button.
 			Console.WriteLine("Click log in button on homepage.");
 			driver.FindElement(By.XPath("//a[@href='/login/']")).Click();
 
 			ValidateLogo();
 			LogInAction(username, password);
-
 			Assert.IsEmpty((driver.FindElements(By.XPath("//*[@id='login']/div/h1/following-sibling::*[1]"))), "Error visible");
 			ValidateLogo();
 
@@ -87,11 +82,11 @@ namespace KunglaProovitoo
 		public void FailToLogIn(string username, string password, string message)
 		{
 			driver.Url = "https://www.okidoki.ee/login/";
-
 			ValidateLogo();
 			LogInAction(username, password);
+			// Validate that error appears.
 			Assert.IsNotEmpty((driver.FindElements(By.XPath("//*[@id='login']/div/h1/following-sibling::*[1]"))), "Error is not visible");
-			// Validate that error appears and user is not loged in.
+			// Validate that error is correct.
 			string error = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id='login']/div/h1/following-sibling::*[1]"))).Text;
 			Assert.AreEqual(message, error, "Error is not correct.");
 		}
