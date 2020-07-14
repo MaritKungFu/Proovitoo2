@@ -105,7 +105,7 @@ namespace KunglaProovitoo
 
 			// Validate that error appears and user is not loged in.
 			string error = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id='login']/div/h1/following-sibling::*[1]"))).Text;
-			Assert.That(error.Contains(message), "Error is not correct.");
+			Assert.AreEqual(message, error, "Error is not correct.");
 		}
 
 		[OneTimeTearDown]
