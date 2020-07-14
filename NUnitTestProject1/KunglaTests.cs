@@ -33,7 +33,7 @@ namespace KunglaProovitoo
 		}
 
 		[Test, Order(1)]
-		// Add valid password.
+		// Insert password.
 		[TestCase("Testitestimine", "", Description = "It is possible to log in with correct username and password")]
 		public void LogIn(string username, string password)
 		{
@@ -79,9 +79,9 @@ namespace KunglaProovitoo
 		[Test, Order (2)]
 		[TestCase("", "", "Sisesta oma kasutajanimi\r\nSisesta oma parool", Description = "It is not possible to log in with empty fields.")]
 		[TestCase("Testitestimine", "", "Sisesta oma parool", Description = "It is not possible to log in with one empty password field.")]
-		// Add correct password, leave username empty.
+		// Insert password, leave username empty.
 		[TestCase("", "", "Sisesta oma kasutajanimi", Description = "It is not possible to log in with empty username field.")]
-		// Add correct password.
+		// Insert password.
 		[TestCase("Marit", "", "Sisestasid vale kasutajanime või parooli", Description = "It is not possible to log in with wrong username.")]
 		[TestCase("Testitestimine", "pauh", "Sisestasid vale kasutajanime või parooli", Description = "It is not possible to log in with wrong password.")]
 		public void FailToLogIn(string username, string password, string message)
