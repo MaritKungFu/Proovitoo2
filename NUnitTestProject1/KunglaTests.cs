@@ -77,10 +77,9 @@ namespace KunglaProovitoo
 		}
 
 		[Test, Order (2)]
-		// Empty fields.
 		[TestCase("", "", "Sisesta oma kasutajanimi\r\nSisesta oma parool", Description = "It is not possible to log in with empty fields.")]
 		[TestCase("Testitestimine", "", "Sisesta oma parool", Description = "It is not possible to log in with one empty password field.")]
-		// Add correct password leave username empty.
+		// Add correct password, leave username empty.
 		[TestCase("", "", "Sisesta oma kasutajanimi", Description = "It is not possible to log in with empty username field.")]
 		// Add correct password.
 		[TestCase("Marit", "", "Sisestasid vale kasutajanime või parooli", Description = "It is not possible to log in with wrong username.")]
